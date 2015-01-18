@@ -20,7 +20,7 @@ Route::get('/', function()
 	$today_date = Carbon::now();
 	$end_date = Carbon::create(2015, 7, 14);
 
-	return View::make('hello', [
+	return View::make('index', [
 		'start_date' =>$start_date,
 		'today_date' =>$today_date,
 		'end_date' =>$end_date,
