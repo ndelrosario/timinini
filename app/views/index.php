@@ -5,9 +5,11 @@
 	<title>It's the final countdown!</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 </head>
 
 <body>
+
 
 <h1>Today is <?php echo $today_date->toFormattedDateString(); ?>.</h1>
 
@@ -24,14 +26,12 @@
 <br>
 <br>
 
-<div class="col-lg-4">
+
 <div class="progress">
   <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $percentage_done ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentage_done ?>%;">
   <?php echo number_format((float)$percentage_done, 2, '.', ''); ?>% there!
   </div>
 </div>
-</div>
-
 
 
 </body>
