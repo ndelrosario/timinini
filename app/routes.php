@@ -44,7 +44,10 @@ Route::post('submit_accept', function()
 
 Route::get('result', function()
 {
-	$start_date = Carbon::create(2015, 1, 05);
+	$start_date = DB::select("SELECT * FROM appointments WHERE start_date = ?", [$start_date]);
+	$start_date = $start_date[0];
+	$start_date = Carbon::instance($start_date);
+
 	$today_date = Carbon::now();
 	$end_date = Carbon::create(2015, 2, 12);
 	$totes_wait = $start_date->diffInDays($end_date);
