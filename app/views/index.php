@@ -11,9 +11,9 @@
 <body>
 
   <form method="POST" action="<?php echo url('submit_accept') ?>" id="search_form">
-      Start Date: <input id="start_date" type="date" name="start_date" class="form-control"><br>
-      End Date:  <input id="end_date" type="date" name="end_date" class="form-control">
-      <input type="submit" value="Submit" class="btn btn-default"><br><br>
+      <h1>I want to count down from:</h1> <input id="start_date" type="date" name="start_date" class="form-control"><br>
+      <h1>I want to count down to:</h1>  <input id="end_date" type="date" name="end_date" class="form-control">
+      <br><br><input type="submit" value="Submit" class="btn btn-default"><br><br>
   </form>
 
 

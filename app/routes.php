@@ -30,22 +30,48 @@ Route::post('submit_accept', function()
     $created_by = 'nicole';
     $created_on = date("Y-m-d");
 
-    $instace = DB::insert("INSERT INTO appointments (start_date, end_date, created_by, created_on) VALUES (?, ?, ?, ?)", [$start_date, $end_date, $created_by, $created_on]);
-    $instance = DB::select("SELECT * FROM appointments WHERE start_date = ?", [$start_date]);
-    $instance = $instance[0];
+    DB::insert("INSERT INTO appointments (start_date, end_date, created_by, created_on) VALUES (?, ?, ?, ?)", [$start_date, $end_date, $created_by, $created_on]);
+
+    $records = DB::select("SELECT * FROM appointments WHERE start_date = ?", [$start_date]);
+    $first_record = $records[0];
+
+    $start_date = $first_record->start_date;
+    $start_date = Carbon::parse($start_date);
+    $end_date = Carbon::parse($end_date);
+
+	$today_date = Carbon::now();
+	$totes_wait = $start_date->diffInDays($end_date);
+	$since_then = $start_date->diffInDays($today_date);
+	$until_then = $end_date->diffInDays($today_date);
+	$percentage_done = ($since_then/$totes_wait)*100;
+
+    $start_date = $start_date->toFormattedDateString();
+    $end_date = $end_date->toFormattedDateString();
 
 
 	return View::make('submit_accept', [
-		'start_date' =>$start_date,
-		]);
+		'start_date' => $start_date,
+		'end_date' =>$end_date,
+		'today_date' =>$today_date,
+		'totes_wait' =>$totes_wait,
+		'since_then' =>$since_then,
+		'until_then' =>$until_then,
+		'percentage_done' =>$percentage_done,
+	]);
 
 });
 
 
 Route::get('result', function()
 {
-	$start_date = DB::select("SELECT * FROM appointments WHERE start_date = ?", [$start_date]);
-	$start_date = $start_date[0];
+
+
+
+	$records = DB::select("SELECT * FROM appointments WHERE start_date = ?", [$start_date]);
+    $first_record = $records[0];
+
+    $start_date = $first_record->start_date;
+
 	$start_date = Carbon::instance($start_date);
 
 	$today_date = Carbon::now();
